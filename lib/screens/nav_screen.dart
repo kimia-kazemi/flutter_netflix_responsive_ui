@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_netflix_responsive_ui/cubits/cubits.dart';
-import 'package:flutter_netflix_responsive_ui/screens/screens.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/widgets.dart';
+import 'package:flutter_netflix_responsive_ui/cubits/app_bar/app_bar_cubit.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/responsive.dart';
+import 'package:flutter_netflix_responsive_ui/screens/comming_soon_screen.dart';
+import 'package:flutter_netflix_responsive_ui/screens/downloads_screen.dart';
+import 'package:flutter_netflix_responsive_ui/screens/home_screen.dart';
+import 'package:flutter_netflix_responsive_ui/screens/more_screen.dart';
+import 'package:flutter_netflix_responsive_ui/screens/search_screen.dart';
 
 class NavScreen extends StatefulWidget {
   @override
@@ -11,11 +15,12 @@ class NavScreen extends StatefulWidget {
 
 class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
+    //it will do the same vertical scroll location as before as navigation job
     HomeScreen(key: PageStorageKey('homeScreen')),
-    Scaffold(),
-    Scaffold(),
-    Scaffold(),
-    Scaffold(),
+    SearchScreen(),
+    CommingSoonScreen(),
+    DownloadsScreen(),
+    MoreScreen(),
   ];
 
   final Map<String, IconData> _icons = const {

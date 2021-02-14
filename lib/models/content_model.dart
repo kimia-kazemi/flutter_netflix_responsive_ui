@@ -8,6 +8,7 @@ class Content {
   final String videoUrl;
   final String description;
   final Color color;
+  final String linkur;
 
   const Content({
     @required this.name,
@@ -16,5 +17,7 @@ class Content {
     this.videoUrl,
     this.description,
     this.color,
+    this.linkur,
+
   });
 }

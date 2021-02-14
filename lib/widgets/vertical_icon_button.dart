@@ -1,13 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VerticalIconButton extends StatelessWidget {
-  final IconData icon;
+  final IconData iconData;
+
   final String title;
   final Function onTap;
 
   const VerticalIconButton({
     Key key,
-    @required this.icon,
+    @required this.iconData,
     @required this.title,
     @required this.onTap,
   }) : super(key: key);
@@ -18,15 +20,12 @@ class VerticalIconButton extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          Icon(icon, color: Colors.white),
+          Icon(iconData, color: Colors.white),
           const SizedBox(height: 2.0),
           Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          )
         ],
       ),
     );

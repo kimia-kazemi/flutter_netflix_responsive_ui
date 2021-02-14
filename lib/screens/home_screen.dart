@@ -1,17 +1,20 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/cubits/cubits.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_netflix_responsive_ui/cubits/app_bar/app_bar_cubit.dart';
 import 'package:flutter_netflix_responsive_ui/data/data.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/widgets.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/content_list.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/content_header.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/custom_app_bar.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/previews.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreen createState() => _HomeScreen();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreen extends State<HomeScreen> {
   ScrollController _scrollController;
 
   @override
@@ -34,55 +37,59 @@ class _HomeScreenState extends State<HomeScreen> {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey[850],
-        child: const Icon(Icons.cast),
-        onPressed: () => print('Cast'),
-      ),
       appBar: PreferredSize(
-        preferredSize: Size(screenSize.width, 50.0),
+        preferredSize: Size(screenSize.width, 50),
         child: BlocBuilder<AppBarCubit, double>(
           builder: (context, scrollOffset) {
-            return CustomAppBar(scrollOffset: scrollOffset);
+            return CustomAppBar(
+              scrollOffSet: scrollOffset,
+            );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        backgroundColor: Colors.grey[800],
+        child: const Icon(Icons.cast),
       ),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
           SliverToBoxAdapter(
-            child: ContentHeader(featuredContent: sintelContent),
+            child: ContentHeader(
+              featuerdContent: darkposter,
+            ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 20),
             sliver: SliverToBoxAdapter(
-              child: Previews(
-                key: PageStorageKey('previews'),
-                title: 'Previews',
-                contentList: previews,
-              ),
+              child: Preview(
+                  key: PageStorageKey('previews'),
+                  title: 'Previews',
+                  contentList: previews),
             ),
           ),
           SliverToBoxAdapter(
             child: ContentList(
-              key: PageStorageKey('myList'),
+              //it will do the same horizental scroll location as before as navigation job
+              key: PageStorageKey('previews'),
               title: 'My List',
               contentList: myList,
             ),
           ),
           SliverToBoxAdapter(
             child: ContentList(
-              key: PageStorageKey('originals'),
+              key: PageStorageKey('previews'),
               title: 'Netflix Originals',
               contentList: originals,
               isOriginals: true,
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.only(bottom: 20.0),
+            padding: const EdgeInsets.only(bottom: 20),
             sliver: SliverToBoxAdapter(
               child: ContentList(
-                key: PageStorageKey('trending'),
+                key: PageStorageKey('previews'),
                 title: 'Trending',
                 contentList: trending,
               ),
